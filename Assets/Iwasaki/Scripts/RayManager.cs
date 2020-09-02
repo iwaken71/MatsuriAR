@@ -30,6 +30,7 @@ namespace Iwaken
                     if (hit.collider.GetComponent<LampionController>())
                     {
                         hit.collider.GetComponent<LampionController>().ChangeColor(LampionColor.Red);
+                        UIManager.Instance.MoveScreen(ScreenState.Question);
                     }
                 }
             }

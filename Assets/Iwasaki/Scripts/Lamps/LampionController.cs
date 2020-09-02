@@ -7,12 +7,28 @@ namespace Iwaken
 {
     public class LampionController : MonoBehaviour
     {
-        [SerializeField] LampionMaterial[] lampionMaterials;
         [SerializeField] MeshRenderer meshRenderer;
+        LampsMaterials materialResource;
+
+        int LampId;
+
+        public void SetUpId(int id)
+        {
+            LampId = id;
+        }
+        public int GetId()
+        {
+            return LampId;
+        }
+
+        void Awake()
+        {
+            materialResource = LampsMaterials.Instance;
+        }
 
         public void ChangeColor(LampionColor color)
         {
-            meshRenderer.material = lampionMaterials.Where(l => color == l.color).Select(l => l.material).First();
+            meshRenderer.material = materialResource.lampionMaterials.Where(l => color == l.color).Select(l => l.material).First();
         }
         void Update()
         {
@@ -36,12 +52,7 @@ namespace Iwaken
             }
         }
     }
-    [System.Serializable]
-    public class LampionMaterial
-    {
-        public LampionColor color;
-        public Material material;
-    }
+
     [System.Serializable]
     public enum LampionColor
     {
