@@ -9,7 +9,7 @@ namespace Iwaken
     public class QuestionScreenPresenter : UIScreenBase
     {
         public override ScreenState state => ScreenState.Question;
-        [SerializeField] Button cancelButton;
+        [SerializeField] Button lightFireButton, cancelButton;
         void Start()
         {
             Initialize();
@@ -17,6 +17,12 @@ namespace Iwaken
 
         void Initialize()
         {
+            lightFireButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                LampsManager.Instance.FireSelectedLamp(LampionColor.Red);
+                Move(ScreenState.LightFire);
+            }
+            ).AddTo(this);
             cancelButton.OnClickAsObservable().Subscribe(_ => { Move(ScreenState.LightFire); }).AddTo(this);
         }
     }

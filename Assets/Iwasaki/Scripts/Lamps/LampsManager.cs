@@ -9,15 +9,41 @@ namespace Iwaken
     {
         [SerializeField] LampionController[] controllers;
 
+        LampionController selectedLamp = null;
+
+        void Start()
+        {
+            Initialize();
+        }
         void Initialize()
         {
-
+            ApplyAllLampColor(LampionColor.Gray);
         }
         void SetAllId()
         {
             for (int i = 0; i < controllers.Length; i++)
             {
                 controllers[i].SetUpId(i);
+            }
+        }
+
+        public void SelectLamp(LampionController controller)
+        {
+            this.selectedLamp = controller;
+        }
+        public void FireSelectedLamp(LampionColor color)
+        {
+            if (this.selectedLamp == null)
+            {
+                return;
+            }
+            this.selectedLamp.ChangeColor(color);
+        }
+        void ApplyAllLampColor(LampionColor color)
+        {
+            foreach (var lamps in controllers)
+            {
+                lamps.ChangeColor(color);
             }
         }
 

@@ -30,27 +30,6 @@ namespace Iwaken
         {
             meshRenderer.material = materialResource.lampionMaterials.Where(l => color == l.color).Select(l => l.material).First();
         }
-        void Update()
-        {
-            if (Input.GetKeyDown("1"))
-            {
-                ChangeColor(LampionColor.Gray);
-
-            }
-            if (Input.GetKeyDown("2"))
-            {
-                Debug.Log("2");
-                ChangeColor(LampionColor.Red);
-            }
-            if (Input.GetKeyDown("3"))
-            {
-                ChangeColor(LampionColor.Blue);
-            }
-            if (Input.GetKeyDown("4"))
-            {
-                ChangeColor(LampionColor.Green);
-            }
-        }
     }
 
     [System.Serializable]
