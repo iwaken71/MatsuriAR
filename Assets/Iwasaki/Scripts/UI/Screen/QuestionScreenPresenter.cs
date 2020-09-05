@@ -10,6 +10,7 @@ namespace Iwaken
     {
         public override ScreenState state => ScreenState.Question;
         [SerializeField] Button lightFireButton, cancelButton;
+        [SerializeField] QuestionListPresenter listPresenter;
         void Start()
         {
             Initialize();
@@ -19,7 +20,7 @@ namespace Iwaken
         {
             lightFireButton.OnClickAsObservable().Subscribe(_ =>
             {
-                LampsManager.Instance.FireSelectedLamp(LampionColor.Red);
+                LampsManager.Instance.FireSelectedLamp(listPresenter.currentColor);
                 Move(ScreenState.LightFire);
             }
             ).AddTo(this);
