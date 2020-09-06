@@ -11,7 +11,7 @@ namespace Iwaken
         LampsMaterials materialResource;
 
         public LampionColor currentColor { private set; get; }
-        //public string na,e
+        public string humanName { private set; get; }
 
         int LampId;
 
