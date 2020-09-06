@@ -19,5 +19,10 @@ namespace Iwaken
         {
             UIManager.Instance.MoveScreen(state);
         }
+
+        public virtual void OnOpenPanel()
+        {
+
+        }
     }
 }

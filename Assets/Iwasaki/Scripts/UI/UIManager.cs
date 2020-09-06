@@ -8,6 +8,7 @@ namespace Iwaken
     public class UIManager : SingletonMonoBehaviour<UIManager>
     {
         [SerializeField] UIScreenBase[] screenBases;
+        public ScreenState currentScreen { private set; get; }
 
         void Start()
         {
@@ -16,15 +17,31 @@ namespace Iwaken
         void Initialize()
         {
             MoveScreen(ScreenState.LightFire);
+            currentScreen = ScreenState.LightFire;
         }
-        public void AddScreen(ScreenState state)
+        void AddScreen(ScreenState state)
         {
-            screenBases.Where(screen => screen.state == state).First().SetActive(true);
+            if (!ContainScreen(state))
+            {
+                return;
+            }
+            var addScreen = screenBases.Where(screen => screen.state == state).First();
+            addScreen.SetActive(true);
+            currentScreen = state;
+            addScreen.OnOpenPanel();
         }
         public void MoveScreen(ScreenState state)
         {
+            if (!ContainScreen(state))
+            {
+                return;
+            }
             ClearAllScreen();
             AddScreen(state);
+        }
+        bool ContainScreen(ScreenState state)
+        {
+            return screenBases.Count(screen => screen.state == state) > 0;
         }
 
         public void ClearAllScreen()
@@ -33,7 +50,6 @@ namespace Iwaken
             {
                 screen.SetActive(false);
             }
-
         }
     }
 }

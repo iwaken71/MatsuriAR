@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using KanKikuchi.AudioManager;
 
 namespace Iwaken
 {
@@ -20,11 +21,17 @@ namespace Iwaken
         {
             lightFireButton.OnClickAsObservable().Subscribe(_ =>
             {
-                LampsManager.Instance.FireSelectedLamp(listPresenter.currentColor);
-                Move(ScreenState.LightFire);
+                LightFire();
             }
             ).AddTo(this);
             cancelButton.OnClickAsObservable().Subscribe(_ => { Move(ScreenState.LightFire); }).AddTo(this);
+        }
+
+        void LightFire()
+        {
+            LampsManager.Instance.FireSelectedLamp(listPresenter.currentColor);
+            SEManager.Instance.Play(SEPath.TENKA);
+            Move(ScreenState.LightFire);
         }
     }
 }

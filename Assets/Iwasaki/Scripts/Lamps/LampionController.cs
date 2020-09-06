@@ -10,6 +10,9 @@ namespace Iwaken
         [SerializeField] MeshRenderer meshRenderer;
         LampsMaterials materialResource;
 
+        public LampionColor currentColor { private set; get; }
+        //public string na,e
+
         int LampId;
 
         public void SetUpId(int id)
@@ -28,6 +31,7 @@ namespace Iwaken
 
         public void ChangeColor(LampionColor color)
         {
+            currentColor = color;
             meshRenderer.material = materialResource.lampionMaterials.Where(l => color == l.color).Select(l => l.material).First();
         }
     }

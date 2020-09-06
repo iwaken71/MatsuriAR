@@ -33,8 +33,33 @@ namespace Iwaken
 
             FireButton.OnClickAsObservable().Subscribe(_ =>
             {
-                UIManager.Instance.MoveScreen(ScreenState.Question);
+                ClickLamp();
             });
+        }
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(2))
+            {
+                ClickLamp();
+            }
+        }
+
+        void ClickLamp()
+        {
+            if (LampsManager.Instance.selectedLamp == null)
+            {
+                return;
+            }
+            else if (LampsManager.Instance.selectedLamp.currentColor == LampionColor.Gray)
+            {
+                UIManager.Instance.MoveScreen(ScreenState.Question);
+
+            }
+            else
+            {
+                UIManager.Instance.MoveScreen(ScreenState.Explanation);
+            }
+
         }
     }
 }

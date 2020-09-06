@@ -8,8 +8,7 @@ namespace Iwaken
     public class LampsManager : SingletonMonoBehaviour<LampsManager>
     {
         [SerializeField] LampionController[] controllers;
-
-        LampionController selectedLamp = null;
+        public LampionController selectedLamp { private set; get; }
 
         void Start()
         {
@@ -46,6 +45,5 @@ namespace Iwaken
                 lamps.ChangeColor(color);
             }
         }
-
     }
 }
